@@ -1,0 +1,29 @@
+.overlay {
+  fill: none;
+  pointer-events: all;
+}
+table.svg-table {
+  border-spacing: 0;
+  border-collapse: collapse;
+  border: 0;
+  width: 100%;
+}
+table.svg-table td {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+table.svg-table tr {
+  height: 100%;
+}
+#svg-container {
+  /*background-color: cyan;*/
+}
+#legend {
+  /*background-color: lime;*/
+  width: 300px;
+}
+.color-pic {
+  width: 15px;
+  height: 15px;
+}

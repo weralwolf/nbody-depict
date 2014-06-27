@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html ng-app>
+
+<head>
+  <meta charset="utf-8">
+  <script src="js/d3.v3.min.js"></script>
+  <script src="js/jquery.min.js"></script>
+  <!--  <script src="js/bootstrap.min.js"></script> -->
+  <script src="js/angular.min.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/nbody.js"></script>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/gui.css" rel="stylesheet">
+  <script>
+    $(document).ready(function() { return setup_nbody("data/b_output.json", "data/author_colors.json", 5); });
+  </script>
+</head>
+
+<body>
+  <table class="svg-table">
+    <tr>
+      <td id="svg-container"></td>
+      <td id="legend" ng-controller='InfoCtrl'>
+        <div style='overflow-y: scroll; height: 600px;'>
+        <div id="search">
+          <form class="navbar-form" role="search" name='searchForm' ng-submit="do_search()">
+            <div class="input-group">
+              <input type="text" class="form-control" id="search_term" placeholder="Wait, loading..." ng-model="search_term">
+              <div class="input-group-btn">
+                <input class="btn btn-primary" type="submit" value="do">
+              </div>
+            </div>
+          </form>
+          <div id='selected-elements'>
+          </div>
+        </div>
+        <hr />
+        <div id="svg-detaild">
+          <h4>Element #{{node_id}}</h4>
+          <p>
+            <b>Author:</b>{{node_info.author}}</p>
+
+        </div>
+        <hr />
+        <div id="dvg-description">
+          <h4>Nbody simulation result</h4>
+          <p>Each circle on the picture corresponds to an author. Proximity between authors calculated based on the similarity of their portfolio (set of most relevant concepts author used in his or her papers).</p>
+          <!--                    <p>You can discover more details about author by clicking on corresponding circle.</p> -->
+          <p>Colors: papers in our dataset divided into several categories. The colour of the author's circle corresponds to the category of the majority of author's papers.</p>
+          <!--                    <p> You can select the set of articles to see concepts they have in common and articles where they appears as coauthors (add if/when it will be done)</p> -->
+          <p>
+            <b>Zoom</b>- use mouse wheel</p>
+          <p>
+            <b>Pan</b>- drag sing mouse</p>
+        </div>
+                <table class='table table-hover table-condensed'>
+          <tr>
+            <td>
+              <div class='color-pic' style='background-color: #00EEEE'></div>
+            </td>
+            <td>
+              <i>Frontiers in Genetics</i>,
+              <i>Frontiers in Bioengineering and Biotechnology</i>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class='color-pic' style='background-color: #A1A1A1'></div>
+            </td>
+            <td>
+              <i>Frontiers in Molecular Neuroscience</i>,
+              <i>Frontiers in Synaptic Neuroscience</i>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class='color-pic' style='background-color: #FAF0E6'></div>
+            </td>
+            <td>
+              <i>Frontiers in Neuroscience</i>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class='color-pic' style='background-color: #00008B'></div>
+            </td>
+            <td>
+              <i>Frontiers in Ecology and Evolution</i>,
+              <i>Frontiers in Environmental Science</i>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class='color-pic' style='background-color: #FFF0F5'></div>
+            </td>
+            <td>
+              <i>Frontiers in Psychiatry</i>,
+              <i>Frontiers in Psychology</i>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class='color-pic' style='background-color: #A9A9A9'></div>
+            </td>
+            <td>
+              <i>Frontiers in Evolutionary Neuroscience</i>,
+              <i>Frontiers in Neurorobotics</i>,
+              <i>Frontiers in Cellular Neuroscience</i>,
+              <i>Frontiers in Behavioral Neuroscience</i>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class='color-pic' style='background-color: #87CEEB'></div>
+            </td>
+            <td>
+              <i>Frontiers in Cellular and Infection Microbiology</i>,
+              <i>Frontiers in Cell and Developmental Biology</i>,
+              <i>Frontiers in Microbiology</i>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class='color-pic' style='background-color: #FF00FF'></div>
+            </td>
+            <td>
+              <i>Frontiers in Oncology</i>,
+              <i>Frontiers in Endocrinology</i>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class='color-pic' style='background-color: #BFEFFF'></div>
+            </td>
+            <td>
+              <i></i>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class='color-pic' style='background-color: #7F7F7F'></div>
+            </td>
+            <td>
+              <i>Frontiers in Physics</i>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class='color-pic' style='background-color: #800000'></div>
+            </td>
+            <td>
+              <i>Frontiers in Immunology</i>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class='color-pic' style='background-color: #FF69B4'></div>
+            </td>
+            <td>
+              <i>Frontiers in Earth Science</i>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class='color-pic' style='background-color: #548B54'></div>
+            </td>
+            <td>
+              <i>Frontiers in Pediatrics</i>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class='color-pic' style='background-color: #D4D4D4'></div>
+            </td>
+            <td>
+              <i>Frontiers in Aging Neuroscience</i>,
+              <i>Frontiers in Human Neuroscience</i>,
+              <i>Frontiers in Neuroanatomy</i>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class='color-pic' style='background-color: #0000EE'></div>
+            </td>
+            <td>
+              <i>Frontiers in Plant Science</i>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class='color-pic' style='background-color: #3B3B3B'></div>
+            </td>
+            <td>
+              <i>Frontiers in Neural Circuits</i>,
+              <i>Frontiers in Neuroinformatics</i>,
+              <i>Frontiers in Computational Neuroscience</i>,
+              <i>Frontiers in Integrative Neuroscience</i>,
+              <i>Frontiers in Neuroscience</i>,
+              <i>Frontiers in Neurology</i>,
+              <i>Frontiers in Neuroscience</i>,
+              <i>Frontiers in Systems Neuroscience</i>,
+              <i>Frontiers in Neuroengineering</i>,
+              <i>Frontiers in Neuroenergetics</i>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class='color-pic' style='background-color: #CDB38B'></div>
+            </td>
+            <td>
+              <i>Frontiers in Chemistry</i>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class='color-pic' style='background-color: #CDAA7D'></div>
+            </td>
+            <td>
+              <i>Frontiers in Public Health</i>,
+              <i>Frontiers in Energy Research</i>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class='color-pic' style='background-color: #FFD700'></div>
+            </td>
+            <td>
+              <i>Frontiers in Pharmacology</i>
+            </td>
+          </tr>
+        </table>
+      </div>
+      </td>
+    </tr>
+  </table>
+</body>
+
+</html>

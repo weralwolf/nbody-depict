@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html ng-app>
+
+<head>
+  <meta charset="utf-8">
+  <script src="js/d3.v3.min.js"></script>
+  <script src="js/jquery.min.js"></script>
+  <!--  <script src="js/bootstrap.min.js"></script> -->
+  <script src="js/angular.min.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/nbody.js"></script>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/gui.css" rel="stylesheet">
+  <script>
+    $(document).ready(function() { return setup_nbody("data/_3_issues_qub_nbody_output.json", "data/_3_issues_coloring_map.json", 1); });
+  </script>
+</head>
+
+<body>
+   <div id="svg-container" style="width:100%; height:100%;"></div>
+</body>
+
+</html>

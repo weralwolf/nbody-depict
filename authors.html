@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html ng-app>
+
+<head>
+  <meta charset="utf-8">
+  <script src="js/d3.v3.min.js"></script>
+  <script src="js/jquery.min.js"></script>
+  <!--  <script src="js/bootstrap.min.js"></script> -->
+  <script src="js/angular.min.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/nbody.js"></script>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/gui.css" rel="stylesheet">
+  <script>
+    $(document).ready(function() { return setup_nbody("data/nbody_output_authors.json", "data/article_colors.json")} );
+  </script>
+</head>
+
+<body>
+  <table class="svg-table">
+    <tr>
+      <td id="svg-container"></td>
+      <td id="legend" ng-controller='InfoCtrl'>
+        <div style="overflow-y: scroll; height: 600px;">
+        <div id="search">
+          <form class="navbar-form" role="search" name='searchForm' ng-submit="do_search()">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Loading names..." ng-model="search_term">
+              <div class="input-group-btn">
+                <input class="btn btn-primary" type="submit" value="do">
+              </div>
+            </div>
+          </form>
+          <div id='selected-elements'>
+          </div>
+        </div>
+        <hr />
+        <div id="svg-detaild">
+          <h4>Element #{{node_id}}</h4>
+          <p>
+            <b>Author:</b>{{node_info.author}}</p>
+
+        </div>
+        <hr />
+        <div id="dvg-description">
+          <h4>Nbody simulation result</h4>
+          <p>Each circle on the picture corresponds to an author. Proximity between authors calculated based on the similarity of their portfolio (set of most relevant concepts author used in his or her papers).</p>
+          <!--                    <p>You can discover more details about author by clicking on corresponding circle.</p> -->
+          <p>Colors: papers in our dataset divided into several categories. The colour of the author's circle corresponds to the category of the majority of author's papers.</p>
+          <!--                    <p> You can select the set of articles to see concepts they have in common and articles where they appears as coauthors (add if/when it will be done)</p> -->
+          <p>
+            <b>Zoom</b>- use mouse wheel</p>
+          <p>
+            <b>Pan</b>- drag sing mouse</p>
+        </div>
+        <table class='table table-hover table-condensed'>
+          <tr>
+            <td>
+              <div class='color-pic' style='background-color: #00EE76'></div>
+            </td>
+            <td>
+              <i>fphys</i>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class='color-pic' style='background-color: #EE7AE9'></div>
+            </td>
+            <td>
+              <i>fnevo</i>,
+              <i>fnbot</i>,
+              <i>fncel</i>,
+              <i>fnbeh</i>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class='color-pic' style='background-color: #CD6600'></div>
+            </td>
+            <td>
+              <i>fpubh</i>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class='color-pic' style='background-color: #8B8970'></div>
+            </td>
+            <td>
+              <i>fphar</i>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class='color-pic' style='background-color: #9370DB'></div>
+            </td>
+            <td>
+              <i>fonc</i>,
+              <i>fendo</i>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class='color-pic' style='background-color: #9400D3'></div>
+            </td>
+            <td>
+              <i>fcimb</i>,
+              <i>fcell</i>,
+              <i>fmicb</i>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class='color-pic' style='background-color: #8470FF'></div>
+            </td>
+            <td>
+              <i>fpsyt</i>,
+              <i>fpsyg</i>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class='color-pic' style='background-color: #6A5ACD'></div>
+            </td>
+            <td>
+              <i>fimmu</i>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class='color-pic' style='background-color: #800080'></div>
+            </td>
+            <td>
+              <i>fevo</i>,
+              <i>fenvs</i>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class='color-pic' style='background-color: #8B814C'></div>
+            </td>
+            <td>
+              <i>fpls</i>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class='color-pic' style='background-color: #FFE1FF'></div>
+            </td>
+            <td>
+              <i>fnagi</i>,
+              <i>fnhum</i>,
+              <i>fnana</i>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class='color-pic' style='background-color: #FF00FF'></div>
+            </td>
+            <td>
+              <i>feart</i>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class='color-pic' style='background-color: #EEEED1'></div>
+            </td>
+            <td>
+              <i>fchem</i>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class='color-pic' style='background-color: #8B3E2F'></div>
+            </td>
+            <td>
+              <i>fenrg</i>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class='color-pic' style='background-color: #DDA0DD'></div>
+            </td>
+            <td>
+              <i>fncir</i>,
+              <i>fneur</i>,
+              <i>fninf</i>,
+              <i>fncom</i>,
+              <i>fnint</i>,
+              <i>fnins</i>,
+              <i>fnent</i>,
+              <i>fnsys</i>,
+              <i>fneng</i>,
+              <i>fnene</i>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class='color-pic' style='background-color: #4B0082'></div>
+            </td>
+            <td>
+              <i>fgene</i>,
+              <i>fbioe</i>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class='color-pic' style='background-color: #FFBBFF'></div>
+            </td>
+            <td>
+              <i>fnmol</i>,
+              <i>fnsyn</i>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class='color-pic' style='background-color: #BA55D3'></div>
+            </td>
+            <td>
+              <i>fphy</i>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class='color-pic' style='background-color: #DCDCDC'></div>
+            </td>
+            <td>
+              <i>fped</i>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class='color-pic' style='background-color: #C67171'></div>
+            </td>
+            <td>
+              <i>neuro</i>
+            </td>
+          </tr>
+        </table>
+        </div>
+      </td>
+    </tr>
+  </table>
+</body>
+
+</html>
