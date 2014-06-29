@@ -30,6 +30,17 @@
                 <input class="btn btn-primary" type="submit" value="do">
               </div>
             </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" value="" ng-model="or_and">
+                <span ng-if="or_and">
+                AND | <i>uncheck to use "OR"</i>
+               </span>
+               <span ng-if="!or_and">
+                OR | <i>check to use "AND"</i>
+               </span>
+              </label>
+            </div>
             <hr />
             <div class="input-group">
               <label>Color picture by: </label>
@@ -43,15 +54,9 @@
           </div>
         </div>
         <hr />
-        <div id="svg-detaild">
-          <h4>Element #{{node_id}}</h4>
-          <p><b>Author:</b>{{node_info.author}}</p>
-        </div>
-        <hr />
-        <div id="dvg-description">
+        <div id="svg-description">
           <h4>Nbody simulation result</h4>
-          <p>Each circle on the picture corresponds to an author. Proximity between authors calculated based on the similarity of their portfolio (set of most relevant concepts author used in his or her papers).</p>
-          <p>Colors: papers in our dataset divided into several categories. The colour of the author's circle corresponds to the category of the majority of author's papers.</p>
+          <p>Each circle on the picture corresponds to a tweet. Proximity between tweets calculated based on concepts in them.</p>
           <p><b>Zoom</b>- use mouse wheel</p>
           <p><b>Pan</b>- drag sing mouse</p>
         </div>

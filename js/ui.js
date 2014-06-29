@@ -7,7 +7,6 @@ function InfoCtrl($scope) {
 
   $scope._selected = [];
 
-  /* Here dirty hack #1.p2 */
   document.scope = $scope;
 
   $scope.update = function () {
@@ -45,11 +44,14 @@ function InfoCtrl($scope) {
     console.log('remove ' + element_id);
   }
 
-  $scope._search_filter = function (search_term) {
+  $scope._search_filter = function (search_term, initial) {
     var nodes = [];
 
     for (var i = 0; Boolean(document.details[i]); ++i) {
       node = document.details[i];
+      if (initial && initial.length && initial.indexOf(node.id) == -1) {
+        continue;
+      }
 
       if (node.text.toLowerCase().indexOf(search_term) != -1) {
         nodes.push(node.id);
@@ -92,7 +94,6 @@ function InfoCtrl($scope) {
       for (var i = 0; i < $scope._selected.length; ++i) {
         d3.selectAll('#E' + $scope._selected[i]).style('fill', colormap[$scope._selected[i]]).style('fill-opacity', 0.6);
       }
-      // $scope._make_selection().style('fill-opacity', 1.).style('font-size', '8px');
     }
 
     $scope._selected = [];
@@ -100,34 +101,18 @@ function InfoCtrl($scope) {
     var terms = $.trim($scope.search_term).split(',').map($.trim);
 
     for (var i = 0; i < terms.length; ++i) {
-      var selected = $scope._search_filter(terms[i]);
-      console.log(selected);
-      $scope._selected = $scope._selected.concat(selected);
+      if (!$scope.or_and) {
+        var selected = $scope._search_filter(terms[i]);
+        $scope._selected = $scope._selected.concat(selected);  
+      } else {
+        $scope._selected = $scope._search_filter(terms[i], $scope._selected);
+      }
+      
     }
-    console.log($scope._selected);
 
     if ($scope._selected.length) {
-      // $scope._selected.map($scope._append_element);
-      $scope._make_selection().style('fill', 'red').style('fill-opacity', 1.);
-      // $scope._make_selection('-t').style('fill-opacity', 0.5).style('font-size', '12px');
+      $scope._make_selection().style('fill', 'yellow').style('fill-opacity', 1.);
     }
   }
 }
 
-/* @stackoverflow-link: http://stackoverflow.com/questions/11868393/angularjs-inputtext-ngchange-fires-while-the-value-is-changing */
-// override the default input to update 
-//    angular.module('ng-nbody', []).directive('ngModelOnchange', function() {
-//        return {
-//            restrict: 'A',
-//            require: 'ngModel',
-//            link: function(scope, elm, attr, ngModelCtrl) {
-//                if (attr.type === 'radio' || attr.type === 'checkbox') return;
-//                console.log("I'm on changing!");
-//                elm.unbind('input').unbind('keydown').unbind('change');
-//                elm.bind('change', function() {
-//                    scope.$apply(function() {
-//                        ngModelCtrl.$setViewValue(elm.val());
-//                    });         
-//                });
-//            }
-//        };

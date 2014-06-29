@@ -150,7 +150,6 @@ function setup_nbody(nbody_output, color_map, r) {
       svg.selectAll("circle")
         .data(json)
         .enter().append("circle")
-      // basic parameters
       .attr("r", function (d) {
         return d[3] * 2 * r
       })
