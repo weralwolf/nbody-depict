@@ -27,3 +27,28 @@ table.svg-table tr {
   width: 15px;
   height: 15px;
 }
+
+
+#info-box {
+  border: 1px black double;
+  background-color: #DDDDDD;
+  /* display: inline; */
+  width: 400px;
+  height: 250px;
+  float: right;
+  z-index: 100;
+  position: absolute;
+  filter: alpha(opacity=30);
+  opacity: 0.3;
+
+}
+
+.tweet-field-name {
+  font-weight: bold;
+  text-align: center;
+  background-color: #DDDDDD;
+}
+.tweet-color-pic {
+  height: 20px;
+  width: 100%;
+}

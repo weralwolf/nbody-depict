@@ -45,29 +45,66 @@ function InfoCtrl($scope) {
     console.log('remove ' + element_id);
   }
 
-  $scope.do_search = function () {
-    if ($scope._selected.length) {
-      $scope._make_selection().style('fill', 'black').style('fill-opacity', 0.3);
-      $scope._make_selection('-t').style('fill-opacity', 0.2).style('font-size', '8px');
-    }
+  $scope._search_filter = function (search_term) {
+    var nodes = [];
 
-    _selected = $.trim($scope.search_term).split(',').map($.trim);
-    for (var inp in _selected) {
-      var in_name = _selected[inp].toLowerCase();
-      for (var name in document.user_map) {
-        if (document.user_map[name].toLowerCase().indexOf(in_name) != -1) {
-          $scope._selected.push(name);
+    for (var i = 0; Boolean(document.details[i]); ++i) {
+      node = document.details[i];
+
+      if (node.text.toLowerCase().indexOf(search_term) != -1) {
+        nodes.push(node.id);
+        continue;
+      }
+
+      var pushed = false;
+
+      for (var j = 0; j < node.concepts.length; ++j) {
+        if (node.concepts[j][1].toLowerCase().indexOf(search_term) != -1) {
+          nodes.push(node.id);
+          pushed = true;
+          break;
         }
       }
-//      var user_id = document.user_map[_selected[i]];
-//      if (user_id) {
-//        $scope._selected.append(user_id);
-//      }
+
+      if (pushed) { continue; }
+
+      for (var j = 0; j < node.kpex.length; ++j) {
+        if (node.kpex[j][0].toLowerCase().indexOf(search_term) != -1) {
+          nodes.push(node.id);
+          pushed = true;
+          break;
+        }
+      }
+
+      if (pushed) { continue; }
+    }
+    return nodes;
+  }
+
+  $scope.do_search = function () {
+    if ($scope._selected.length) {
+      for (var i = 0; i < $scope._selected.length; ++i) {
+        d3.selectAll('#E' + $scope._selected[i]).style('fill', document.color_map[$scope._selected[i]]).style('fill-opacity', 0.6);
+      }
+      // $scope._make_selection().style('fill-opacity', 1.).style('font-size', '8px');
     }
 
-    //$scope._selected.map($scope._append_element);
-    $scope._make_selection().style('fill', 'red').style('fill-opacity', 0.8).attr('r', 100);
-    $scope._make_selection('-t').style('fill-opacity', 0.8).style('font-size', '12px');
+    $scope._selected = [];
+
+    var terms = $.trim($scope.search_term).split(',').map($.trim);
+
+    for (var i = 0; i < terms.length; ++i) {
+      var selected = $scope._search_filter(terms[i]);
+      console.log(selected);
+      $scope._selected = $scope._selected.concat(selected);
+    }
+    console.log($scope._selected);
+
+    if ($scope._selected.length) {
+      // $scope._selected.map($scope._append_element);
+      $scope._make_selection().style('fill', 'red').style('fill-opacity', 1.);
+      // $scope._make_selection('-t').style('fill-opacity', 0.5).style('font-size', '12px');
+    }
   }
 }
 

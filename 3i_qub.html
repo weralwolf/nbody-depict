@@ -17,7 +17,40 @@
 </head>
 
 <body>
-   <div id="svg-container" style="width:100%; height:100%;"></div>
+  <table class="svg-table">
+    <tr>
+      <td id="svg-container"></td>
+      <td id="legend" ng-controller='InfoCtrl'>
+        <div style='overflow-y: scroll; height: 600px;'>
+        <div id="search">
+          <form class="navbar-form" role="search" name='searchForm' ng-submit="do_search()">
+            <div class="input-group">
+              <input type="text" class="form-control" id="search_term" placeholder="Wait, loading..." ng-model="search_term">
+              <div class="input-group-btn">
+                <input class="btn btn-primary" type="submit" value="do">
+              </div>
+            </div>
+          </form>
+          <div id='selected-elements'>
+          </div>
+        </div>
+        <hr />
+        <div id="svg-detaild">
+          <h4>Element #{{node_id}}</h4>
+          <p><b>Author:</b>{{node_info.author}}</p>
+        </div>
+        <hr />
+        <div id="dvg-description">
+          <h4>Nbody simulation result</h4>
+          <p>Each circle on the picture corresponds to an author. Proximity between authors calculated based on the similarity of their portfolio (set of most relevant concepts author used in his or her papers).</p>
+          <p>Colors: papers in our dataset divided into several categories. The colour of the author's circle corresponds to the category of the majority of author's papers.</p>
+          <p><b>Zoom</b>- use mouse wheel</p>
+          <p><b>Pan</b>- drag sing mouse</p>
+        </div>
+      </div>
+      </td>
+    </tr>
+  </table>
 </body>
 
 </html>
