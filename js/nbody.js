@@ -8,14 +8,6 @@ function show_node_info(d) {
     result += '<tr><td><b>Date:</b> ' + dd.date + '</td></tr>';
     result += '<tr><td><b>Retweets:</b> ' + dd.retweets + '</td></tr>';
 
-    if (document.user_details) {
-      user = document.user_details[d[0]]
-      result += '<tr><td><b>User:</b> ' + user.name + '</td></tr>';
-      if (user.description) {
-        result += '<tr class="tweet-field-name"><td>Description</td></tr><tr class="tweet-field-value"><td>' + user.description + '</td></tr>';
-      }
-    }
-
     if (dd.concepts.length) {
       result += '<tr class="tweet-field-name"><td>Ontology concepts</td></tr>';
       result += '<tr><td><table class="table table-condensed"><thead><tr><th>#</th><th>Name</th><th>Frequency</th></tr></thead>';
@@ -34,6 +26,14 @@ function show_node_info(d) {
         result += '<tr><td>' + dd.kpex[i][0] + '</td><td>' + dd.kpex[i][1] + '</td><td>' + dd.kpex[i][2] + '</td></tr>';
       }
       result += '</tbody></table></td></tr>';
+    }
+
+    if (document.user_details) {
+      user = document.user_details[d[0]]
+      result += '<tr><td><b>User:</b> ' + user.name + '</td></tr>';
+      if (user.description) {
+        result += '<tr class="tweet-field-name"><td>Description</td></tr><tr class="tweet-field-value"><td>' + user.description + '</td></tr>';
+      }
     }
     
     result += '</table>';

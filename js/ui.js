@@ -98,6 +98,10 @@ function InfoCtrl($scope) {
 
     $scope._selected = [];
 
+    if (!$scope.search_term.trim().length) {
+      return;
+    }
+
     var terms = $.trim($scope.search_term).split(',').map($.trim);
 
     for (var i = 0; i < terms.length; ++i) {
