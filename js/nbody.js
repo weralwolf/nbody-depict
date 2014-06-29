@@ -1,8 +1,9 @@
 function show_node_info(d) {
   if (document.details) {
     var dd = document.details[d[0]];
+    var color = document.colormap.maps[document.colormap.current][d[0]];
     var result = '<table class="table table-condensed" width="300px">';
-    result += '<tr><td><div class="tweet-color-pic" style="background-color: ' + dd.color + ';"></div></td></tr>';
+    result += '<tr><td><div class="tweet-color-pic" style="background-color: ' + color + ';"></div></td></tr>';
     result += '<tr class="tweet-field-name"><td>Text</td></tr><tr class="tweet-field-value"><td>' + dd.text + '</td></tr>';
     result += '<tr><td><b>Date:</b> ' + dd.date + '</td></tr>';
     result += '<tr><td><b>Retweets:</b> ' + dd.retweets + '</td></tr>';
