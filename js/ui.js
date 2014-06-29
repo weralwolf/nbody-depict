@@ -81,10 +81,16 @@ function InfoCtrl($scope) {
     return nodes;
   }
 
+  $scope.update_color_map = function () {
+    document.colormap.load($scope.color_map_selection);
+    $scope._selected = [];
+  }
+
   $scope.do_search = function () {
     if ($scope._selected.length) {
+      var colormap = document.colormap.maps[document.colormap.current];
       for (var i = 0; i < $scope._selected.length; ++i) {
-        d3.selectAll('#E' + $scope._selected[i]).style('fill', document.color_map[$scope._selected[i]]).style('fill-opacity', 0.6);
+        d3.selectAll('#E' + $scope._selected[i]).style('fill', colormap[$scope._selected[i]]).style('fill-opacity', 0.6);
       }
       // $scope._make_selection().style('fill-opacity', 1.).style('font-size', '8px');
     }
