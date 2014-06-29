@@ -50,8 +50,8 @@ d3.json('data/ddetails.json', function (error, json) {
 
 
       outersvg = d3.select("#svg-container").append("svg")
-        .attr("width", "100%")
-        .attr("height", "100%")
+        .attr("width", width)
+        .attr("height", height)
         .append("g")
         .call(zoom)
         .attr("clip-path", "url(#clip)");
