@@ -85,6 +85,12 @@ function InfoCtrl($scope) {
 
   $scope.update_color_map = function () {
     document.colormap.load($scope.color_map_selection);
+    if ($scope._selected.length) {
+      var colormap = document.colormap.maps[document.colormap.current];
+      for (var i = 0; i < $scope._selected.length; ++i) {
+        d3.selectAll('#E' + $scope._selected[i]).style('fill', colormap[$scope._selected[i]]).style('fill-opacity', 0.6).attr('r', 10);
+      }
+    }
     $scope._selected = [];
   }
 

@@ -9,7 +9,7 @@ function show_node_info(d) {
     result += '<tr><td><b>Retweets:</b> ' + dd.retweets + '</td></tr>';
 
     if (dd.concepts.length) {
-      result += '<tr class="tweet-field-name"><td>Ontology concepts</td></tr>';
+      result += '<tr class="tweet-field-name"><td><i>cluster:</i> Ontology concepts</td></tr>';
       result += '<tr><td><table class="table table-condensed"><thead><tr><th>#</th><th>Name</th><th>Frequency</th></tr></thead>';
       result += '<tbody>';
       for (i = 0; i < dd.concepts.length && i < 5; ++i) {
@@ -19,7 +19,7 @@ function show_node_info(d) {
     }
     
     if (dd.kpex.length) {
-      result += '<tr class="tweet-field-name"><td>KPEX terms</td></tr>';
+      result += '<tr class="tweet-field-name"><td><i>cluster:</i> KPEX terms</td></tr>';
       result += '<tr><td><table class="table table-condensed"><thead><tr><th>Name</th><th>Score</th><th>Frequency</th></tr></thead>';
       result += '<tbody>';
       for (i = 0; i < dd.kpex.length && i < 5; ++i) {
