@@ -24,6 +24,7 @@ table.svg-table tr {
 #legend {
   background-color: #999DA5;
   width: 300px;
+  height:954px;
 }
 
 table.svg-table td {
@@ -32,7 +33,7 @@ table.svg-table td {
 
 #legend>div {
  overflow-y: scroll; 
- height:954px;
+ height: 954px;
 }
 
 .color-pic {
