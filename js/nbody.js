@@ -160,7 +160,7 @@ function setup_nbody(nbody_output, color_map, r) {
       .attr("id", function (d) {
         return "E" + d[0];
       })
-      .style('fill-opacity', 0.6)
+      .style('fill-opacity', 1.)
       .style('fill', function (d) {
         return d[4];
       })

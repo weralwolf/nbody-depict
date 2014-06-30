@@ -88,7 +88,7 @@ function InfoCtrl($scope) {
     if ($scope._selected.length) {
       var colormap = document.colormap.maps[document.colormap.current];
       for (var i = 0; i < $scope._selected.length; ++i) {
-        d3.selectAll('#E' + $scope._selected[i]).style('fill', colormap[$scope._selected[i]]).style('fill-opacity', 0.6).attr('r', 10);
+        d3.selectAll('#E' + $scope._selected[i]).style('fill', colormap[$scope._selected[i]]).style('fill-opacity', 1.).attr('r', 10);
       }
     }
     $scope._selected = [];
@@ -98,7 +98,7 @@ function InfoCtrl($scope) {
     if ($scope._selected.length) {
       var colormap = document.colormap.maps[document.colormap.current];
       for (var i = 0; i < $scope._selected.length; ++i) {
-        d3.selectAll('#E' + $scope._selected[i]).style('fill', colormap[$scope._selected[i]]).style('fill-opacity', 0.6).attr('r', 10);
+        d3.selectAll('#E' + $scope._selected[i]).style('fill', colormap[$scope._selected[i]]).style('fill-opacity', 1.).attr('r', 10);
       }
     }
 
@@ -121,7 +121,7 @@ function InfoCtrl($scope) {
     }
 
     if ($scope._selected.length) {
-      $scope._make_selection().style('fill', 'yellow').style('fill-opacity', 1.).attr('r', 20);
+      $scope._make_selection().style('fill', 'yellow').style('fill-opacity', 0.8).attr('r', 20);
     }
   }
 }
