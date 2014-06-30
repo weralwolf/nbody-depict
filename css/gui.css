@@ -16,13 +16,25 @@ table.svg-table td {
 table.svg-table tr {
   height: 100%;
 }
+
 #svg-container {
-  /*background-color: cyan;*/
+  background-color: #003E3E;
 }
+
 #legend {
-  /*background-color: lime;*/
+  background-color: #999DA5;
   width: 300px;
 }
+
+table.svg-table td {
+  padding: 10px 10px 10px 10px;
+}
+
+#legend>div {
+ overflow-y: scroll; 
+ height:954px;
+}
+
 .color-pic {
   width: 15px;
   height: 15px;
@@ -46,6 +58,7 @@ table.svg-table tr {
 .tweet-field-name {
   font-weight: bold;
   text-align: center;
+  /*color: #FFFFFF;*/
   background-color: #DDDDDD;
 }
 .tweet-color-pic {

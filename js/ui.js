@@ -58,27 +58,27 @@ function InfoCtrl($scope) {
         continue;
       }
 
-      var pushed = false;
+      // var pushed = false;
 
-      for (var j = 0; j < node.concepts.length; ++j) {
-        if (node.concepts[j][1].toLowerCase().indexOf(search_term) != -1) {
-          nodes.push(node.id);
-          pushed = true;
-          break;
-        }
-      }
+      // for (var j = 0; j < node.concepts.length; ++j) {
+      //   if (node.concepts[j][1].toLowerCase().indexOf(search_term) != -1) {
+      //     nodes.push(node.id);
+      //     pushed = true;
+      //     break;
+      //   }
+      // }
 
-      if (pushed) { continue; }
+      // if (pushed) { continue; }
 
-      for (var j = 0; j < node.kpex.length; ++j) {
-        if (node.kpex[j][0].toLowerCase().indexOf(search_term) != -1) {
-          nodes.push(node.id);
-          pushed = true;
-          break;
-        }
-      }
+      // for (var j = 0; j < node.kpex.length; ++j) {
+      //   if (node.kpex[j][0].toLowerCase().indexOf(search_term) != -1) {
+      //     nodes.push(node.id);
+      //     pushed = true;
+      //     break;
+      //   }
+      // }
 
-      if (pushed) { continue; }
+      // if (pushed) { continue; }
     }
     return nodes;
   }
