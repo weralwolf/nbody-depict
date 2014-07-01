@@ -18,6 +18,7 @@ echo ${#data_files[@]}' files to download'
 for i in "${data_files[@]}"
 do
 	echo 'Downloading '$i'...'
+	# echo wget -c -q $base_url$i.json
 	`wget -c -q $base_url$i.json`
 done
 

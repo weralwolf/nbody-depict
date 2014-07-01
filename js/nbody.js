@@ -114,15 +114,18 @@ function setup_nbody(nbody_output, color_map, r) {
       document.colormap.current = color_map;
       document.colormap.maps[color_map] = colors;
 
+      var width = $(document).width() - margin.right - margin.left,
+        height = $(document).height() - margin.top - margin.bottom;
+
       function zoomed() {
+          console.log(d3.event.scale);
+          console.log(d3.event.translate);
+          console.log(d3.event);
+          console.log('--------');
           svg.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
       }
 
       var zoom = d3.behavior.zoom().scaleExtent([0., 10]).on("zoom", zoomed);
-       
-      var width = $(document).width() - margin.right - margin.left,
-        height = $(document).height() - margin.top - margin.bottom;
-
 
       outersvg = d3.select("#svg-container").append("svg")
         .attr("width", width)
@@ -152,7 +155,7 @@ function setup_nbody(nbody_output, color_map, r) {
         .data(json)
         .enter().append("circle")
       .attr("r", function (d) {
-        return d[3] * 2 * r
+        return d[3];
       })
       .attr("transform", function (d) {
         return "translate(" + d[1] + ", " + d[2] + ")";
