@@ -123,7 +123,7 @@ function InfoCtrl($scope) {
     }
 
     if ($scope._selected.length) {
-      $scope._make_selection().style('fill', 'yellow').style('fill-opacity', 0.8).attr('r', function (d) { return 2 * d[3]; });
+      $scope._make_selection().style('fill', 'yellow').style('fill-opacity', 0.8).attr('r', function (d) { return 3.5 * d[3]; });
     }
   }
 }
