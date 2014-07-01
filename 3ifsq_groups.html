@@ -47,7 +47,7 @@
                </span>
               </label>
             </div>
-            <hr>
+            <hr />
             <div>
               <label>Color picture by: </label>
               <select ng-model="color_map_selection" ng-change="update_color_map()" class="form-control">
@@ -64,8 +64,13 @@
               </select>
             </div>
           </form>
-          <div id='selected-elements'>
+          <div id="legend-bar">
+            <div ng-repeat="element in legend">
+              <div class="color-pic" style="background-color: {{element[1]}}"></div>
+              <i>{{element[0]}}</i>
+            </div>
           </div>
+          <hr />
         </div>
         <div id="svg-detaild">
         </div>

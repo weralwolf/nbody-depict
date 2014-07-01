@@ -47,27 +47,61 @@ document.user_details = null;
 document.colormap = {
   current: null,
   maps: {},
+  legends: {},
   load: function(filename) {
-    // console.log('Loading ' + filename + '...');
+    document.colormap.current = filename;
     if (!document.colormap.maps.hasOwnProperty(filename)) {
-      // console.log('Not loaded, retreaving data...');
       d3.json(filename, function (error, map) {
         if (error) {
-          // console.log("Error while color map " + filename + ": " + error);
           return;
         }
-        // console.log('Data retrieved for ' + filename);
         document.colormap.maps[filename] = map;
         document.colormap.load(filename);
       });
       return;
     }
-    // console.log('Assign colors for ' + filename + ' map');
     svg.selectAll("circle").style('fill', function(d) {
       return document.colormap.maps[filename][d[0]];
     });
-    // console.log('Assign current');
-    document.colormap.current = filename;
+  },
+  legend: function() {
+    topics = [
+      ["'Climate change' and 'Global warming'", "#FA3B55"],
+      ["'Sea-level rise' and 'Climate change'", "#FF4900"],
+      ["'Weather extremes' and 'Climate change'", "#4CC0F2"],
+      ["'Sea ice' and 'Global warming'", "#B3C0CA"],
+      ["'CH4' and 'Climate'", "#5CFCEE"],
+      ["'CH4' and 'Water'", "#FF70FF"],
+      ["'Fracking' and 'CH4'", "#69AB0A"],
+      ["'Pollution' and 'Fracking'", "#CD4F39"],
+      ["'CH4' and 'Gas Industry'", "#FFFF00"],
+      ["'Fracking' and 'Methane Emissions'", "#00FF00"]
+    ]
+
+    issues = [
+      ["'Climate change' and 'Sea level rise'", "#68228B"],
+      ["'Fossil fuels' and 'GHG emissions'", "#CD8500"],
+      ["'Climate change' and 'Weather extremes'", "#5CFCEE"]
+    ]
+
+    returns = {
+      "data/groups_in_favor_coloring.json": topics,
+      "data/groups_coloring.json": topics,
+      "data/groups_agains_coloring.json": topics,
+      "data/issues_in_favor_coloring.json": issues,
+      "data/_3_issues_coloring_map.json": issues,
+      "data/issues_agains_coloring.json": issues
+    }
+    
+    if (returns.hasOwnProperty(document.colormap.current)) {
+      return returns[document.colormap.current];
+    }
+
+    if (!document.colormap.current) {
+      return returns["data/groups_coloring.json"];
+    }
+
+    return [];
   }
 }
 
@@ -117,10 +151,10 @@ function setup_nbody(nbody_output, color_map, r) {
         height = $(document).height() - margin.top - margin.bottom;
 
       function zoomed() {
-          console.log(d3.event.scale);
-          console.log(d3.event.translate);
-          console.log(d3.event);
-          console.log('--------');
+          // console.log(d3.event.scale);
+          // console.log(d3.event.translate);
+          // console.log(d3.event);
+          // console.log('--------');
           svg.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
       }
 

@@ -1,14 +1,18 @@
+hr {
+  margin-top: 10px;
+  margin-bottom:10px;
+}
+
 .overlay {
   fill: none;
   pointer-events: all;
 }
+
 .clicked{
   stroke-width:8;
   stroke:#FF0000 ;
 }
-hr{
-  margin: 10px 5px 10px 5px;
-}
+
 table.svg-table {
   border-spacing: 0;
   border-collapse: collapse;
@@ -46,8 +50,11 @@ table.svg-table td {
 }
 
 .color-pic {
-  width: 15px;
-  height: 15px;
+  width: 20px;
+  height: 20px;
+  border: 1px solid black;
+  float: left;
+  padding-left: 5px; 
 }
 
 

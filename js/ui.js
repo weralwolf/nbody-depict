@@ -46,6 +46,7 @@ function InfoCtrl($scope) {
 
   $scope._search_filter = function (search_term, initial) {
     var nodes = [];
+    search_term = search_term.toLowerCase();
 
     for (var i = 0; Boolean(document.details[i]); ++i) {
       node = document.details[i];
@@ -54,6 +55,11 @@ function InfoCtrl($scope) {
       }
 
       if (node.text.toLowerCase().indexOf(search_term) != -1) {
+        nodes.push(node.id);
+        continue;
+      }
+
+      if (document.user_details[i].name.indexOf(search_term) != -1) {
         nodes.push(node.id);
         continue;
       }
@@ -83,8 +89,13 @@ function InfoCtrl($scope) {
     return nodes;
   }
 
+  $scope.legend = document.colormap.legend()
+
+
   $scope.update_color_map = function () {
+
     document.colormap.load($scope.color_map_selection);
+    $scope.legend = document.colormap.legend();
     if ($scope._selected.length) {
       var colormap = document.colormap.maps[document.colormap.current];
       for (var i = 0; i < $scope._selected.length; ++i) {
@@ -92,6 +103,7 @@ function InfoCtrl($scope) {
         .style('fill-opacity', 1.).attr('r', function (d) { return d[3]; });
       }
     }
+    
     $scope._selected = [];
   }
 
