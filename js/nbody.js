@@ -191,7 +191,7 @@ function setup_nbody(nbody_output, color_map, r) {
         .data(json)
         .enter().append("circle")
       .attr("r", function (d) {
-        return d[3];
+        return d[3] + 5;
       })
       .attr("transform", function (d) {
         return "translate(" + d[1] + ", " + d[2] + ")";
@@ -203,8 +203,10 @@ function setup_nbody(nbody_output, color_map, r) {
       .style('fill', function (d) {
         return d[4];
       })
-      .on("click", function(d){ 
-        show_node_info(d);        
+      .on("click", function(d) { 
+        show_node_info(d);
+      })
+      .on("doubleclick", function(d) {
         $(this)[0].classList.toggle("clicked");
       });
 

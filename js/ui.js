@@ -93,14 +93,13 @@ function InfoCtrl($scope) {
 
 
   $scope.update_color_map = function () {
-
     document.colormap.load($scope.color_map_selection);
     $scope.legend = document.colormap.legend();
     if ($scope._selected.length) {
       var colormap = document.colormap.maps[document.colormap.current];
       for (var i = 0; i < $scope._selected.length; ++i) {
         d3.selectAll('#E' + $scope._selected[i]).style('fill', colormap[$scope._selected[i]])
-        .style('fill-opacity', 1.).attr('r', function (d) { return d[3]; });
+        .style('fill-opacity', 1.).attr('r', function (d) { return d[3] + 5; });
       }
     }
     
@@ -112,7 +111,7 @@ function InfoCtrl($scope) {
       var colormap = document.colormap.maps[document.colormap.current];
       for (var i = 0; i < $scope._selected.length; ++i) {
         d3.selectAll('#E' + $scope._selected[i]).style('fill', colormap[$scope._selected[i]])
-        .style('fill-opacity', 1.).attr('r', function (d) { return d[3]; });
+        .style('fill-opacity', 1.).attr('r', function (d) { return d[3] + 5; });
       }
     }
 
