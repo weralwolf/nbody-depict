@@ -80,8 +80,8 @@ document.colormap = {
 
     issues = [
       ["'Climate change' and 'Sea level rise'", "#68228B"],
-      ["'Fossil fuels' and 'GHG emissions'", "#CD8500"],
-      ["'Climate change' and 'Weather extremes'", "#5CFCEE"]
+      ["'Fossil fuels' and 'GHG emissions'", "#6E7B8B"],
+      ["'Climate change' and 'Weather extremes'", "#0CA73D"]
     ]
 
     returns = {
