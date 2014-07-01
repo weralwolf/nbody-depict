@@ -121,7 +121,7 @@ function InfoCtrl($scope) {
     }
 
     if ($scope._selected.length) {
-      $scope._make_selection().style('fill', 'yellow').style('fill-opacity', 0.8).attr('r', 20);
+      $scope._make_selection().style('fill', 'yellow').style('fill-opacity', 0.8).attr('r', 16);
     }
   }
 }

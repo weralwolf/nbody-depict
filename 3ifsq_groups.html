@@ -22,6 +22,12 @@
       <td id="svg-container"></td>
       <td id="legend" ng-controller='InfoCtrl'>
         <div>
+        <div id="svg-description">
+          <h4><b> Nbody simulation result </b></h4>
+          <p>Each circle on the picture corresponds to a tweet. Proximity between tweets calculated based on concepts in them.<br>
+          <b>*Zoom</b>: use mouse wheel<br>
+          <b>*Pan</b>: drag sing mouse
+        </div>
         <div id="search">
           <form class="navbar-form" role="search" name='searchForm' ng-submit="do_search()">
             <div class="input-group">
@@ -41,18 +47,18 @@
                </span>
               </label>
             </div>
-            <hr />
-            <div class="input-group">
+            <hr>
+            <div>
               <label>Color picture by: </label>
               <select ng-model="color_map_selection" ng-change="update_color_map()" class="form-control">
                 <option value="data/groups_in_favor_coloring.json">"in favor" by topics</option>
                 <option ng-selected="true" value="data/groups_coloring.json">topics</option>
                 <option value="data/groups_agains_coloring.json">"against" by topics</option>
-                <option disabled>----------------</option>
+                <option disabled>------------------------</option>
                 <option value="data/issues_in_favor_coloring.json">"in favor" by issues</option>
                 <option value="data/_3_issues_coloring_map.json">issues</option>
                 <option value="data/issues_agains_coloring.json">"against" by issues</option>
-                <option disabled>----------------</option>
+                <option disabled>------------------------</option>
                 <option value="data/date_coloring.json">by time</option>
                 <option value="data/retweets_coloring.json">by retweets</option>
               </select>
@@ -62,13 +68,6 @@
           </div>
         </div>
         <div id="svg-detaild">
-        </div>
-        <hr />
-        <div id="svg-description">
-          <h4>Nbody simulation result</h4>
-          <p>Each circle on the picture corresponds to a tweet. Proximity between tweets calculated based on concepts in them.</p>
-          <p><b>Zoom</b>- use mouse wheel</p>
-          <p><b>Pan</b>- drag sing mouse</p>
         </div>
       </div>
       </td>

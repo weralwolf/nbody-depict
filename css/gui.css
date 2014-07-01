@@ -2,6 +2,13 @@
   fill: none;
   pointer-events: all;
 }
+.clicked{
+  stroke-width:8;
+  stroke:#FF0000 ;
+}
+hr{
+  margin: 10px 5px 10px 5px;
+}
 table.svg-table {
   border-spacing: 0;
   border-collapse: collapse;
@@ -16,7 +23,9 @@ table.svg-table td {
 table.svg-table tr {
   height: 100%;
 }
-
+.table-condensed {
+  width: 95%;
+}
 #svg-container {
   background-color: #061B2E;
 }
@@ -60,9 +69,31 @@ table.svg-table td {
   font-weight: bold;
   text-align: center;
   /*color: #FFFFFF;*/
-  background-color: #DDDDDD;
+  background-color: white;
 }
 .tweet-color-pic {
   height: 20px;
   width: 100%;
+}
+#svg-description h4{
+  color: white;
+}
+.navbar-form {
+  padding-left: 0;
+}
+.navbar-form .form-control{
+  width: 100%;
+}
+table.inner-subtable {
+  width: 100%;
+  text-align: center;
+}
+.table>tbody>tr>td{
+  border-top: 0px; 
+  padding-left: 0px;
+  padding-right: 0px;
+}
+.inner-subtable>tbody>tr>td{
+  padding-left: 5px;
+  padding-right: 5px;
 }

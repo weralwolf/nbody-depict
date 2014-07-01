@@ -2,15 +2,14 @@ function show_node_info(d) {
   if (document.details) {
     var dd = document.details[d[0]];
     var color = document.colormap.maps[document.colormap.current][d[0]];
-    var result = '<table class="table table-condensed" width="300px">';
-    result += '<tr><td><div class="tweet-color-pic" style="background-color: ' + color + ';"></div></td></tr>';
-    result += '<tr class="tweet-field-name"><td>Text</td></tr><tr class="tweet-field-value"><td>' + dd.text + '</td></tr>';
+    var result = '<table class="table table-condensed" width="400px"><hr>';
+    result += '<tr class="tweet-field-name"><td style="border: 5px solid' + color + ';">Twitter Post</td></tr><tr class="tweet-field-value"><td>' + dd.text + '</td></tr>';
     result += '<tr><td><b>Date:</b> ' + dd.date + '</td></tr>';
     result += '<tr><td><b>Retweets:</b> ' + dd.retweets + '</td></tr>';
 
     if (dd.concepts.length) {
       result += '<tr class="tweet-field-name"><td><i>cluster:</i> Ontology concepts</td></tr>';
-      result += '<tr><td><table class="table table-condensed"><thead><tr><th>#</th><th>Name</th><th>Frequency</th></tr></thead>';
+      result += '<tr><td><table class="table table-condensed inner-subtable"><thead><tr><th>#</th><th>Name</th><th>Frequency</th></tr></thead>';
       result += '<tbody>';
       for (i = 0; i < dd.concepts.length && i < 5; ++i) {
         result += '<tr><td>' + dd.concepts[i][0] + '</td><td>' + dd.concepts[i][1] + '</td><td>' + dd.concepts[i][2] + '</td></tr>';
@@ -20,7 +19,7 @@ function show_node_info(d) {
     
     if (dd.kpex.length) {
       result += '<tr class="tweet-field-name"><td><i>cluster:</i> KPEX terms</td></tr>';
-      result += '<tr><td><table class="table table-condensed"><thead><tr><th>Name</th><th>Score</th><th>Frequency</th></tr></thead>';
+      result += '<tr><td><table class="table table-condensed inner-subtable"><thead><tr><th>Name</th><th>Score</th><th>Frequency</th></tr></thead>';
       result += '<tbody>';
       for (i = 0; i < dd.kpex.length && i < 5; ++i) {
         result += '<tr><td>' + dd.kpex[i][0] + '</td><td>' + dd.kpex[i][1] + '</td><td>' + dd.kpex[i][2] + '</td></tr>';
@@ -85,7 +84,7 @@ d3.json('data/ddetails.json', function (error, json) {
     return;
   }
   document.details = json;
-  d3.select("#search_term").attr("placeholder", "Type here your search request...");
+  d3.select("#search_term").attr("placeholder", "Search by keyword");
 });
 
 d3.json('data/user_data.json', function (error, json) {
@@ -118,7 +117,7 @@ function setup_nbody(nbody_output, color_map, r) {
           svg.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
       }
 
-      var zoom = d3.behavior.zoom().scaleExtent([0., 10]).on("zoom", zoomed);
+      var zoom = d3.behavior.zoom().scaleExtent([0., 40]).on("zoom", zoomed);
        
       var width = $(document).width() - margin.right - margin.left,
         height = $(document).height() - margin.top - margin.bottom;
@@ -164,7 +163,11 @@ function setup_nbody(nbody_output, color_map, r) {
       .style('fill', function (d) {
         return d[4];
       })
-      .on("click", show_node_info);
+      .on("click", function(d){ 
+        show_node_info(d);        
+        $(this)[0].classList.toggle("clicked");
+      });
+
     });
   });
 }
