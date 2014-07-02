@@ -85,12 +85,12 @@ document.colormap = {
     ]
 
     returns = {
-      "data/groups_in_favor_coloring.json": topics,
+      "data/groups_in_favor_coloring_mono.json": topics,
       "data/groups_coloring.json": topics,
-      "data/groups_agains_coloring.json": topics,
-      "data/issues_in_favor_coloring.json": issues,
+      "data/groups_agains_coloring_mono.json": topics,
+      "data/issues_in_favor_coloring_mono.json": issues,
       "data/_3_issues_coloring_map.json": issues,
-      "data/issues_agains_coloring.json": issues
+      "data/issues_agains_coloring_mono.json": issues
     }
     
     if (returns.hasOwnProperty(document.colormap.current)) {
