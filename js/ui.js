@@ -59,7 +59,7 @@ function InfoCtrl($scope) {
         continue;
       }
 
-      if (document.user_details[i].name.indexOf(search_term) != -1) {
+      if (document.user_details[i].name.toLowerCase().indexOf(search_term) != -1) {
         nodes.push(node.id);
         continue;
       }
