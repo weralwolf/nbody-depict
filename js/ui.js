@@ -5,9 +5,55 @@ function InfoCtrl($scope) {
     'author': empty_text
   };
 
-  $scope._selected = [];
+  // $scope.top_users = [
+  //   [
+  //     ["climate change", "sea level rise"], 
+  //     [
+  //       {"retweets_count": 1101, "name": "Mygreenbooking"}, 
+  //       {"retweets_count": 1094, "name": "\u00d7\u0e14.\u0e40\u0e14\u0e47\u0e01\u0e2b\u0e21\u0e35\u0e19\u0e49\u0e2d\u0e22\u00d7"}, 
+  //       {"retweets_count": 1092, "name": "\u0e41\u0e21\u0e27\u0e19\u0e49\u0e2d\u0e22"}, 
+  //       {"retweets_count": 1089, "name": "\u2663 \u0e19\u0e31\u0e21\u0e40\u0e1a\u0e2d\u0e23\u0e4c\u0e44\u0e19\u0e19\u0e4c \u2116.9 \u2660"}, 
+  //       {"retweets_count": 887, "name": "Mantaseafood "}, 
+  //       {"retweets_count": 846, "name": "Joshua  Coleman"}, 
+  //       {"retweets_count": 844, "name": "\u306a\u307f"}, 
+  //       {"retweets_count": 844, "name": "Roberto Casalini"}, 
+  //       {"retweets_count": 841, "name": "Matteo Nardi"}, 
+  //       {"retweets_count": 840, "name": "Maria Chiara Mascia"}
+  //     ]
+  //   ], 
+  //   [
+  //     ["fossil fuels", "ghg emissions"], 
+  //     [
+  //       {"retweets_count": 474, "name": "John Lundin"}, 
+  //       {"retweets_count": 332, "name": "Frack Off"}, 
+  //       {"retweets_count": 288, "name": "WhoIsGovt"}, 
+  //       {"retweets_count": 274, "name": "The Daily Planet"}, 
+  //       {"retweets_count": 176, "name": "350 dot org"}, 
+  //       {"retweets_count": 166, "name": "Kasim Arman Ul-Haq"}, 
+  //       {"retweets_count": 165, "name": "Marcellus Wallace"}, 
+  //       {"retweets_count": 158, "name": "AdvanceMattapan"}, 
+  //       {"retweets_count": 154, "name": "Climate Progress"}, 
+  //       {"retweets_count": 137, "name": "Jamie Rumble"}
+  //     ]
+  //   ], 
+  //   [
+  //     ["climate change", "weather extremes"], 
+  //     [
+  //       {"retweets_count": 1404, "name": "Tild Dallelie"}, 
+  //       {"retweets_count": 1404, "name": "John Houck"}, 
+  //       {"retweets_count": 1404, "name": "Ms B_Orlando"}, 
+  //       {"retweets_count": 1246, "name": "Steve Martin"}, 
+  //       {"retweets_count": 1235, "name": "Geoff Webber"}, 
+  //       {"retweets_count": 1228, "name": "jeremy gimbel"}, 
+  //       {"retweets_count": 1204, "name": "Bretta Applebaum"}, 
+  //       {"retweets_count": 1204, "name": "Celeste Leibowitz"}, 
+  //       {"retweets_count": 1204, "name": "Larry K"}, 
+  //       {"retweets_count": 1150, "name": "Maria G"}
+  //     ]
+  //   ]
+  // ];
 
-  document.scope = $scope;
+  $scope._selected = [];
 
   $scope.update = function () {
     $scope.node_info['author'] = 'King Arthur';
@@ -117,6 +163,10 @@ function InfoCtrl($scope) {
 
     $scope._selected = [];
 
+    if (!$scope.search_term) {
+      $scope.search_term = $('#search_term').val();
+    }
+
     if (!$scope.search_term.trim().length) {
       return;
     }
@@ -136,6 +186,12 @@ function InfoCtrl($scope) {
     if ($scope._selected.length) {
       $scope._make_selection().style('fill', 'yellow').style('fill-opacity', 0.8).attr('r', function (d) { return 3.5 * d[3]; });
     }
+  }
+
+  $scope.do_search_string = function (search_term) {
+    console.log(search_term);
+    $scope.search_term = search_term;
+    $scope.do_search();
   }
 }
 

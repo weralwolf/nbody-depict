@@ -104,3 +104,7 @@ table.inner-subtable {
   padding-left: 5px;
   padding-right: 5px;
 }
+
+div.top-users > table {
+  display: none;
+}

@@ -3,7 +3,8 @@ function show_node_info(d) {
     var dd = document.details[d[0]];
     var color = document.colormap.maps[document.colormap.current][d[0]];
     var result = '<table class="table table-condensed" width="400px"><hr>';
-    result += '<tr class="tweet-field-name"><td style="border: 5px solid' + color + ';">Twitter Post</td></tr><tr class="tweet-field-value"><td>' + dd.text + '</td></tr>';
+    result += '<tr class="tweet-field-name"><td style="border: 5px solid' + color + ';">Twitter Post</td></tr>';
+    result += '<tr class="tweet-field-value"><td>' + dd.text.replace(/@\w+/g, "<a href=\"#\" class=\"do_search_string\">$&</a>") + '</td></tr>';
     result += '<tr><td><b>Date:</b> ' + dd.date + '</td></tr>';
     result += '<tr><td><b>Retweets:</b> ' + dd.retweets + '</td></tr>';
 
@@ -37,6 +38,10 @@ function show_node_info(d) {
     
     result += '</table>';
     $('#svg-detaild').html(result);
+    $('.do_search_string').click(function() {
+      $('#search_term').val($(this).html());
+      $('.btn.btn-primary').click();
+    });
   } else {
     $('#svg-detaild').html('Details not loaded yet...');  
   }
@@ -79,8 +84,8 @@ document.colormap = {
     ]
 
     issues = [
-      ["'Climate change' and 'Sea level rise'", "#68228B"],
-      ["'Fossil fuels' and 'GHG emissions'", "#6E7B8B"],
+      ["'Climate change' and 'Sea level rise'", "#ff0000"],
+      ["'Fossil fuels' and 'GHG emissions'", "#87CEFF"],
       ["'Climate change' and 'Weather extremes'", "#0CA73D"]
     ]
 

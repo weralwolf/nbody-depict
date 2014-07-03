@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html ng-app>
+
+<head>
+  <meta charset="utf-8">
+  <script src="js/d3.v3.min.js"></script>
+  <script src="js/jquery.min.js"></script>
+  <!--  <script src="js/bootstrap.min.js"></script> -->
+  <script src="js/angular.min.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/nbody.js"></script>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/gui.css" rel="stylesheet">
+  <script>
+    $(document).ready(function() { 
+      setup_nbody("data/nbb.json", "data/groups_coloring.json", 1); 
+
+    //   $('.list-holder').click(function() {
+    //     var self = $(this);
+    //     if(self.hasClass("less")) {
+    //         self.removeClass("less");
+    //         self.parent('.top-users').children('table').show();
+    //         self.html('[-]');
+    //     } else {
+    //         self.addClass("less");
+    //         self.parent('.top-users').children('table').hide();
+    //         self.html('[+]');
+    //     }
+    //     return false;
+    //   });
+
+    //   $('.username-to-search').each(function() {
+    //     $(this).click(function() {
+    //       $('#search_term').val($(this).html());
+    //       $('.btn.btn-primary').click();
+    //     });
+    //   });
+    });
+  </script>
+</head>
+
+<body>
+   <table class="svg-table">
+    <tr>
+      <td id="svg-container"></td>
+      <td id="legend" ng-controller='InfoCtrl'>
+        <div>
+        <div id="svg-description">
+          <h4><b> Nbody simulation result </b></h4>
+          <p>Each circle on the picture corresponds to a tweet. Proximity between tweets calculated based on concepts in them.<br>
+          <b>*Zoom</b>: use mouse wheel<br>
+          <b>*Pan</b>: drag sing mouse
+        </div>
+        <div id="search">
+          <form class="navbar-form" role="search" name='searchForm' ng-submit="do_search()">
+            <div class="input-group">
+              <input type="text" class="form-control" id="search_term" placeholder="Wait, loading..." ng-model="search_term">
+              <div class="input-group-btn">
+                <input class="btn btn-primary" type="submit" value="go">
+              </div>
+            </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" value="" ng-model="or_and">
+                <span ng-if="or_and">
+                AND | <i>uncheck to use "OR"</i>
+               </span>
+               <span ng-if="!or_and">
+                OR | <i>check to use "AND"</i>
+               </span>
+              </label>
+            </div>
+            <hr />
+<!--             <div>
+              <h4>Top users by issues</h4>
+              <hr />
+              <div ng-repeat="issue in top_users" class="top-users">
+                <a class="list-holder less">[+]</a> {{issue[0][0]}} & {{issue[0][1]}}
+                <table class="table table-condensed table-hover" style="background-color: #ffffff; width: 100%;">
+                  <tr ng-repeat="tuser in issue[1]">
+                    <td><a class="username-to-search">{{tuser.name}}</a></td>
+                  </tr>
+                </table>
+                <hr />
+              </div>
+            </div> -->
+            <div>
+              <label>Color picture by: </label>
+              <select ng-model="color_map_selection" ng-change="update_color_map()" class="form-control">
+                <option value="data/groups_in_favor_coloring_mono.json">"in favor" by topics</option>
+                <option value="data/groups_coloring.json">topics</option>
+                <option value="data/groups_agains_coloring_mono.json">"against" by topics</option>
+                <option disabled>------------------------</option>
+                <option value="data/issues_in_favor_coloring_mono.json">"in favor" by issues</option>
+                <option ng-selected="true" value="data/_3_issues_coloring_map.json">issues</option>
+                <option value="data/issues_agains_coloring_mono.json">"against" by issues</option>
+                <option disabled>------------------------</option>
+                <option value="data/date_coloring_mono.json">by time (2 months)</option>
+                <option value="data/date_coloring_4_mono.json">by time (4 months)</option>
+                <option value="data/date_coloring_6_mono.json">by time (6 months)</option>
+                <option value="data/date_coloring_12_mono.json">by time (12 months)</option>
+                <option value="data/retweets_coloring.json">by retweets</option>
+              </select>
+            </div>
+          </form>
+          <div id="legend-bar">
+            <div ng-repeat="element in legend">
+              <div class="color-pic" style="background-color: {{element[1]}}"></div>
+              <i>{{element[0]}}</i>
+            </div>
+          </div>
+          <hr />
+        </div>
+        <div id="svg-detaild">
+        </div>
+      </div>
+      </td>
+    </tr>
+  </table>
+</body>
+
+</html>
