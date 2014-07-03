@@ -163,9 +163,11 @@ function InfoCtrl($scope) {
 
     $scope._selected = [];
 
-    if (!$scope.search_term) {
-      $scope.search_term = $('#search_term').val();
-    }
+    // if (!$scope.search_term) {
+    $scope.search_term = $('#search_term').val();
+    // }
+
+    
 
     if (!$scope.search_term.trim().length) {
       return;
@@ -186,12 +188,6 @@ function InfoCtrl($scope) {
     if ($scope._selected.length) {
       $scope._make_selection().style('fill', 'yellow').style('fill-opacity', 0.8).attr('r', function (d) { return 3.5 * d[3]; });
     }
-  }
-
-  $scope.do_search_string = function (search_term) {
-    console.log(search_term);
-    $scope.search_term = search_term;
-    $scope.do_search();
   }
 }
 
