@@ -103,7 +103,7 @@ document.colormap = {
     }
 
     if (!document.colormap.current) {
-      return returns["data/groups_coloring.json"];
+      return returns["data/_3_issues_coloring_map.json"];
     }
 
     return [];
